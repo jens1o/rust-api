@@ -21,7 +21,7 @@ fn serve_favicon() -> Option<NamedFile> {
 
 fn main() {
     rocket::ignite()
-        .mount("/hello", routes![hello::route])
+        .mount("/hello", routes![hello::route_json, hello::route_text])
         .mount("/greet", routes![greet::route])
         .mount("/", routes![index::route])
         .mount("/gone", routes![gone::route])
