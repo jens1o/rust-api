@@ -16,13 +16,27 @@ mod stats;
 
 use hit_count::HitCount;
 use rocket::response::NamedFile;
+use rocket::Request;
 use rocket::State;
+use rocket_contrib::Json;
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 #[get("/")]
 fn serve_favicon(hit_count: State<HitCount>) -> Option<NamedFile> {
     hit_count.count.fetch_add(1, Ordering::Acquire);
     NamedFile::open("favicon.ico").ok()
+}
+
+#[catch(404)]
+fn not_found(request: &Request) -> Json {
+    let message = match request.format() {
+        Some(ref format) if !format.is_json() => format!(
+            "Invalid format \"{}\" supplied, only application/json supported.",
+            format
+        ),
+        _ => String::from("404 - Wrong route"),
+    };
+    Json(json!({"error": true, "message": message}))
 }
 
 fn main() {
@@ -35,5 +49,6 @@ fn main() {
         .mount("/gone", routes![gone::route])
         .mount("/favicon.ico", routes![serve_favicon])
         .mount("/stats", routes![stats::route])
+        .catch(catchers![not_found])
         .launch();
 }
