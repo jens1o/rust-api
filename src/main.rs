@@ -15,9 +15,11 @@ mod model;
 mod stats;
 
 use hit_count::HitCount;
+use rocket::fairing::{Fairing, Info, Kind};
+use rocket::http::Header;
 use rocket::response::NamedFile;
-use rocket::Request;
 use rocket::State;
+use rocket::{Request, Response};
 use rocket_contrib::Json;
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -39,8 +41,24 @@ fn not_found(request: &Request) -> Json {
     Json(json!({"error": true, "message": message}))
 }
 
+struct ReplaceServerHeader {}
+
+impl Fairing for ReplaceServerHeader {
+    fn info(&self) -> Info {
+        Info {
+            name: "Replace Server header",
+            kind: Kind::Response,
+        }
+    }
+
+    fn on_response(&self, _request: &Request, response: &mut Response) {
+        response.set_header(Header::new("Server", "jens1o"));
+    }
+}
+
 fn main() {
     rocket::ignite()
+        .attach(ReplaceServerHeader {})
         .manage(HitCount {
             count: AtomicUsize::new(0),
         }).mount("/hello", routes![hello::route_json, hello::route_text])
