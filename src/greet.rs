@@ -13,6 +13,7 @@ fn route(user: User, mut cookies: Cookies) -> Json {
     } else {
         println!("Cookie does not exist!");
         cookies.add_private(Cookie::new("test", "123456"));
+        println!("Cookie has been set.");
     }
 
     Json(json!({
