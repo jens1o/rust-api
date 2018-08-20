@@ -52,7 +52,12 @@ impl Fairing for ReplaceServerHeader {
     }
 
     fn on_response(&self, _request: &Request, response: &mut Response) {
-        response.set_header(Header::new("Server", "jens1o"));
+        let mut server_name = "jens1o".to_owned();
+        if cfg!(debug_assertions) {
+            server_name.push_str(" [DEBUG]");
+        }
+
+        response.set_header(Header::new("Server", server_name));
     }
 }
 
