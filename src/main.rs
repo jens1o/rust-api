@@ -41,7 +41,7 @@ fn not_found(request: &Request) -> Json {
     Json(json!({"error": true, "message": message}))
 }
 
-struct ReplaceServerHeader {}
+struct ReplaceServerHeader;
 
 impl Fairing for ReplaceServerHeader {
     fn info(&self) -> Info {
