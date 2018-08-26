@@ -63,7 +63,7 @@ impl Fairing for ReplaceServerHeader {
 
 fn main() {
     rocket::ignite()
-        .attach(ReplaceServerHeader {})
+        .attach(ReplaceServerHeader)
         .manage(HitCount {
             count: AtomicUsize::new(0),
         }).mount("/hello", routes![hello::route_json, hello::route_text])
