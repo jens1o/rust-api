@@ -3,3 +3,5 @@
 
 # hide editor config files
 .vscode/
+
+hit_count.txt

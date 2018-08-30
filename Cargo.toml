@@ -7,3 +7,4 @@ authors = ["jens1o <jenshausdorf@gmail.com>"]
 rocket = "0.3.16"
 rocket_codegen = "0.3.16"
 rocket_contrib = "0.3.16"
+ctrlc = "3"
