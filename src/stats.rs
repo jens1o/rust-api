@@ -1,5 +1,3 @@
-extern crate rocket;
-
 use hit_count::HitCount;
 use rocket::State;
 use rocket_contrib::Json;

@@ -1,5 +1,3 @@
-extern crate rocket;
-
 use rocket_contrib::Json;
 
 #[get("/<username>/<age>", format = "application/json")]

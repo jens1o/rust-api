@@ -1,5 +1,3 @@
-extern crate rocket;
-
 use rocket::http::Status;
 use rocket::response::Failure;
 

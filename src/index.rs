@@ -1,4 +1,3 @@
-extern crate rocket;
 use rocket_contrib::Json;
 
 #[get("/")]

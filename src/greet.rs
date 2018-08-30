@@ -1,4 +1,3 @@
-extern crate rocket;
 use model::user::User;
 use rocket::http::Cookie;
 use rocket::http::Cookies;
