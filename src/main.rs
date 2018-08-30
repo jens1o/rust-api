@@ -18,6 +18,7 @@ mod stats;
 use hit_count::HitCount;
 use rocket::response::NamedFile;
 use rocket::Request;
+use rocket::Rocket;
 use rocket::State;
 use rocket_contrib::Json;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -40,7 +41,7 @@ fn not_found(request: &Request) -> Json {
     Json(json!({"error": true, "message": message}))
 }
 
-fn main() {
+fn rocket() -> Rocket {
     rocket::ignite()
         .attach(fairings::ReplaceServerHeader)
         .manage(HitCount {
@@ -52,5 +53,8 @@ fn main() {
         .mount("/favicon.ico", routes![serve_favicon])
         .mount("/stats", routes![stats::route])
         .catch(catchers![not_found])
-        .launch();
+}
+
+fn main() {
+    rocket().launch();
 }
