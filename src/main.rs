@@ -6,6 +6,7 @@ extern crate rocket;
 #[macro_use]
 extern crate rocket_contrib;
 
+mod fairings;
 mod gone;
 mod greet;
 mod hello;
@@ -15,11 +16,9 @@ mod model;
 mod stats;
 
 use hit_count::HitCount;
-use rocket::fairing::{Fairing, Info, Kind};
-use rocket::http::Header;
 use rocket::response::NamedFile;
+use rocket::Request;
 use rocket::State;
-use rocket::{Request, Response};
 use rocket_contrib::Json;
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -41,41 +40,9 @@ fn not_found(request: &Request) -> Json {
     Json(json!({"error": true, "message": message}))
 }
 
-struct ReplaceServerHeader;
-
-impl ReplaceServerHeader {
-    #[cfg(not(debug_assertions))]
-    #[inline(always)]
-    fn get_server_name() -> &'static str {
-        "jens1o"
-    }
-
-    #[cfg(debug_assertions)]
-    #[inline(always)]
-    fn get_server_name() -> &'static str {
-        "jens1o [DEBUG]"
-    }
-}
-
-impl Fairing for ReplaceServerHeader {
-    fn info(&self) -> Info {
-        Info {
-            name: "Replace Server header",
-            kind: Kind::Response,
-        }
-    }
-
-    fn on_response(&self, _request: &Request, response: &mut Response) {
-        response.set_header(Header::new(
-            "Server",
-            ReplaceServerHeader::get_server_name(),
-        ));
-    }
-}
-
 fn main() {
     rocket::ignite()
-        .attach(ReplaceServerHeader)
+        .attach(fairings::ReplaceServerHeader)
         .manage(HitCount {
             count: AtomicUsize::new(0),
         }).mount("/hello", routes![hello::route_json, hello::route_text])
