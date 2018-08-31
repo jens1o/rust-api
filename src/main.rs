@@ -27,6 +27,8 @@ use std::io::prelude::*;
 use std::path::Path;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
+use std::thread;
+use std::time::Duration;
 
 const HIT_COUNT_FILE: &'static str = "hit_count.txt";
 
@@ -77,17 +79,18 @@ fn main() {
             .read_to_string(&mut file_content)
             .unwrap();
 
-        hit_count = file_content.parse().unwrap();
+        hit_count = file_content.parse().expect("no valid integer value given");
     }
+
+    // TODO: Clean this up to a dedicated manager?
 
     let hit_count = HitCount {
         count: Arc::new(AtomicUsize::new(hit_count)),
     };
 
     let count = Arc::clone(&hit_count.count);
-
-    ctrlc::set_handler(move || {
-        println!("Exiting!");
+    let count2 = Arc::clone(&hit_count.count);
+    let save_closure = move || {
         let mut file = OpenOptions::new()
             .write(true)
             .truncate(true)
@@ -95,8 +98,34 @@ fn main() {
             .open(HIT_COUNT_FILE)
             .unwrap();
 
-        write!(file, "{}", count.load(Ordering::SeqCst).to_string());
-    }).unwrap();
+        let current_count = count.load(Ordering::SeqCst).to_string();
+        write!(file, "{}", current_count);
+        println!("Saved current favicon state: {}", current_count);
+        return current_count;
+    };
+
+    let cloned_closure = save_closure.clone();
+
+    let empty_closure = move || {
+        cloned_closure();
+    };
+
+    let get_value = move || count2.load(Ordering::SeqCst);
+
+    ctrlc::set_handler(empty_closure).unwrap();
+
+    thread::spawn(move || {
+        let mut saved_value = get_value();
+        loop {
+            if get_value() != saved_value {
+                saved_value = save_closure().parse().unwrap();
+                println!("Updated hit count: {}", saved_value);
+            } else {
+                println!("Skipped saving hit count, same value!");
+            }
+            thread::sleep(Duration::from_secs(15));
+        }
+    });
 
     rocket(hit_count).launch();
 }
