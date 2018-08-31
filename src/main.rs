@@ -108,6 +108,7 @@ fn main() {
 
     let empty_closure = move || {
         cloned_closure();
+        std::process::exit(0);
     };
 
     let get_value = move || count2.load(Ordering::SeqCst);
@@ -119,7 +120,6 @@ fn main() {
         loop {
             if get_value() != saved_value {
                 saved_value = save_closure().parse().unwrap();
-                println!("Updated hit count: {}", saved_value);
             } else {
                 println!("Skipped saving hit count, same value!");
             }
