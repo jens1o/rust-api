@@ -117,13 +117,15 @@ fn main() {
 
     thread::spawn(move || {
         let mut saved_value = get_value();
+        let sleep_duration = Duration::from_secs(15);
         loop {
+            thread::sleep(sleep_duration);
+
             if get_value() != saved_value {
                 saved_value = save_closure().parse().unwrap();
             } else {
-                println!("Skipped saving hit count, same value!");
+                println!("> Skipped saving hit count, same value!");
             }
-            thread::sleep(Duration::from_secs(15));
         }
     });
 
