@@ -117,6 +117,7 @@ fn main() {
     thread::spawn(move || {
         let mut saved_value = get_value();
         let sleep_duration = Duration::from_secs(15);
+
         loop {
             thread::sleep(sleep_duration);
 
