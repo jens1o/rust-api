@@ -17,16 +17,15 @@ mod model;
 mod stats;
 
 use hit_count::HitCount;
-use rocket::response::NamedFile;
-use rocket::Request;
-use rocket::Rocket;
-use rocket::State;
+use rocket::{response::NamedFile, Request, Rocket, State};
 use rocket_contrib::Json;
 use std::fs::{File, OpenOptions};
 use std::io::prelude::*;
 use std::path::Path;
-use std::sync::atomic::{AtomicUsize, Ordering};
-use std::sync::Arc;
+use std::sync::{
+    atomic::{AtomicUsize, Ordering},
+    Arc,
+};
 use std::thread;
 use std::time::Duration;
 
