@@ -303,7 +303,7 @@ dependencies = [
 
 [[package]]
 name = "rocket"
-version = "0.3.16"
+version = "0.3.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "base64 0.9.3 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -327,22 +327,22 @@ dependencies = [
 
 [[package]]
 name = "rocket_codegen"
-version = "0.3.16"
+version = "0.3.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "log 0.3.9 (registry+https://github.com/rust-lang/crates.io-index)",
- "rocket 0.3.16 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rocket 0.3.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "version_check 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "yansi 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "rocket_contrib"
-version = "0.3.16"
+version = "0.3.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "log 0.3.9 (registry+https://github.com/rust-lang/crates.io-index)",
- "rocket 0.3.16 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rocket 0.3.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.79 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_json 1.0.31 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -352,9 +352,9 @@ name = "rust-api"
 version = "0.1.0"
 dependencies = [
  "ctrlc 3.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "rocket 0.3.16 (registry+https://github.com/rust-lang/crates.io-index)",
- "rocket_codegen 0.3.16 (registry+https://github.com/rust-lang/crates.io-index)",
- "rocket_contrib 0.3.16 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rocket 0.3.17 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rocket_codegen 0.3.17 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rocket_contrib 0.3.17 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -551,9 +551,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum rayon-core 1.4.1 (registry+https://github.com/rust-lang/crates.io-index)" = "b055d1e92aba6877574d8fe604a63c8b5df60f60e5982bf7ccbb1338ea527356"
 "checksum redox_syscall 0.1.40 (registry+https://github.com/rust-lang/crates.io-index)" = "c214e91d3ecf43e9a4e41e578973adeb14b474f2bee858742d127af75a0112b1"
 "checksum ring 0.11.0 (registry+https://github.com/rust-lang/crates.io-index)" = "1f2a6dc7fc06a05e6de183c5b97058582e9da2de0c136eafe49609769c507724"
-"checksum rocket 0.3.16 (registry+https://github.com/rust-lang/crates.io-index)" = "4dc32be1d093e7b2f9718983318c6bf5a14f43d7ea01a0b5143c3450c90725b9"
-"checksum rocket_codegen 0.3.16 (registry+https://github.com/rust-lang/crates.io-index)" = "bfc94e7781a8bc502f3614521ae94b562f209c7537671cb6169cbbe9dbcc6c5e"
-"checksum rocket_contrib 0.3.16 (registry+https://github.com/rust-lang/crates.io-index)" = "c1bae00c367de4599157febc585431c7c647c5f0ffa8fa0e9e875edbbb0bd929"
+"checksum rocket 0.3.17 (registry+https://github.com/rust-lang/crates.io-index)" = "a61d746c68f1d357f6e011985570474c4af368aa81900320074098d34ed0c64e"
+"checksum rocket_codegen 0.3.17 (registry+https://github.com/rust-lang/crates.io-index)" = "7873d65adfa3e440ac373a28240341853da170913aad7e4207c0198389e5d0e9"
+"checksum rocket_contrib 0.3.17 (registry+https://github.com/rust-lang/crates.io-index)" = "4b2348e3b2458e173203f1e51f3b2e00495a092b70bd9506d2ce2ac64e129d14"
 "checksum ryu 0.2.6 (registry+https://github.com/rust-lang/crates.io-index)" = "7153dd96dade874ab973e098cb62fcdbb89a03682e46b144fd09550998d4a4a7"
 "checksum safemem 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "e27a8b19b835f7aea908818e871f5cc3a5a186550c30773be987e155e8163d8f"
 "checksum safemem 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)" = "8dca453248a96cb0749e36ccdfe2b0b4e54a61bfef89fb97ec621eb8e0a93dd9"
