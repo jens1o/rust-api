@@ -1,9 +1,9 @@
 use hit_count::HitCount;
 use rocket::State;
-use rocket_contrib::Json;
+use rocket_contrib::json::{Json, JsonValue};
 use std::sync::atomic::Ordering;
 
 #[get("/")]
-fn route(hit_counter: State<HitCount>) -> Json {
+pub fn route(hit_counter: State<HitCount>) -> Json<JsonValue> {
     Json(json!({"favicon_hit_count": hit_counter.count.load(Ordering::Relaxed)}))
 }

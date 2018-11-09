@@ -1,12 +1,12 @@
-use rocket_contrib::Json;
+use rocket_contrib::json::JsonValue;
 
-#[get("/<username>/<age>", format = "application/json")]
-fn route_json(username: String, age: u8) -> Json {
+#[get("/<username>/<age>", format = "application/json", rank = 1)]
+pub fn route_json(username: String, age: u8) -> JsonValue {
     let message = format!("Hello, {} year old named {}!", age, username);
-    Json(json!({ "message": message }))
+    json!({ "message": message })
 }
 
-#[get("/<username>/<age>", format = "text/html")]
-fn route_text(username: String, age: u8) -> String {
+#[get("/<username>/<age>", format = "text/html", rank = 4)]
+pub fn route_text(username: String, age: u8) -> String {
     format!("Hello, {} year old named {}!", age, username)
 }
